@@ -2,9 +2,6 @@ import { ServiceProto } from 'tsrpc-proto';
 import { MsgChat } from './MsgChat';
 import { ReqSend, ResSend } from './PtlSend';
 
-// This is a demo service proto file (auto generated)
-// Feel free to delete it
-
 export interface ServiceType {
     api: {
         "Send": {
@@ -18,14 +15,15 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
+    "version": 3,
     "services": [
         {
-            "id": 0,
+            "id": 4,
             "name": "Chat",
             "type": "msg"
         },
         {
-            "id": 1,
+            "id": 3,
             "name": "Send",
             "type": "api"
         }

@@ -1,26 +1,22 @@
 import { ApiCall } from "tsrpc";
-import { server } from "..";
 import { ReqSend, ResSend } from "../shared/protocols/PtlSend";
-
-// This is a demo code file
-// Feel free to delete it
+import { server } from "..";
 
 export default async function (call: ApiCall<ReqSend, ResSend>) {
     // Error
     if (call.req.content.length === 0) {
         call.error('Content is empty')
-        return;
+    } else {
+        let time = new Date();
+        let connect = call.req.content;
+        call.succ({
+            time: time
+        });
+        server.broadcastMsg('Chat', {
+            content: connect,
+            time: time
+        })
     }
 
     // Success
-    let time = new Date();
-    call.succ({
-        time: time
-    });
-
-    // Broadcast
-    server.broadcastMsg('Chat', {
-        content: call.req.content,
-        time: time
-    })
 }
